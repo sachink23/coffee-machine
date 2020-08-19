@@ -10,42 +10,43 @@ public class CoffeeMachine {
 
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
-        System.out.println("Write action (buy, fill, take, remaining, exit):");
-        String action = scanner.next();
         boolean exit = false;
-        switch (action) {
-            case "buy":
-                performBuyAction();
-                break;
+        do {
+            System.out.println("Write action (buy, fill, take, remaining, exit): ");
+            String action = scanner.next();
+            switch (action) {
+                case "buy":
+                    performBuyAction();
+                    break;
 
-            case "fill":
-                performFillAction();
-                break;
+                case "fill":
+                    performFillAction();
+                    break;
 
-            case "take":
-                performTakeAction();
-                break;
-            case "remaining":
-                displayAvailableSupplies();
-                break;
-            case "exit":
-                exit = true;
-                break;
-            default:
-                break;
+                case "take":
+                    performTakeAction();
+                    break;
+                case "remaining":
+                    displayAvailableSupplies();
+                    break;
+                case "exit":
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Sorry, I didn't understand\n");
+                    break;
+            }
         }
-        if (!exit) {
-            main(null);
-        }
+        while (!exit);
     }
 
     private static void displayAvailableSupplies() {
         System.out.println("The coffee machine has:");
-        System.out.println(getAvailableWater() + " of water");
-        System.out.println(getAvailableMilk() + " of milk");
-        System.out.println(getAvailableBeans() + " of coffee beans");
-        System.out.println(getAvailableCups() + " of disposable cups");
-        System.out.println(getAvailableMoney() + " of money");
+        System.out.println(getAvailableWater() + " ml of water");
+        System.out.println(getAvailableMilk() + " ml of milk");
+        System.out.println(getAvailableBeans() + " gm of coffee beans");
+        System.out.println(getAvailableCups() + " disposable cup/s");
+        System.out.println("₹" + getAvailableMoney() + " money\n");
     }
 
     public static int getAvailableWater() {
@@ -108,6 +109,7 @@ public class CoffeeMachine {
                     status = makeCappuccino();
                     break;
                 default:
+                    System.out.println("Sorry, I didn't understand\n");
                     break;
             }
         }
@@ -144,20 +146,21 @@ public class CoffeeMachine {
             canMakeCoffee = false;
         }
         if (getAvailableMilk() < requiredMilk) {
-            System.out.println("Sorry, not enough milk!");
+            System.out.println("Sorry, not enough milk!\n");
             canMakeCoffee = false;
         }
         if (getAvailableBeans() < requiredBeans) {
-            System.out.println("Sorry, not enough coffee beans!");
+            System.out.println("Sorry, not enough coffee beans!\n");
             canMakeCoffee = false;
         }
         if (getAvailableCups() < 1) {
-            System.out.println("Sorry, not enough cups!");
+            System.out.println("Sorry, not enough cups!\n");
             canMakeCoffee = false;
         }
 
         if (canMakeCoffee) {
             System.out.println("I have enough resources, making you a coffee!");
+            System.out.println("|_P\n");
             setAvailableMoney(getAvailableMoney() + addsAmount);
             setAvailableCups(getAvailableCups() - 1);
             setAvailableBeans(getAvailableBeans() - requiredBeans);
@@ -184,6 +187,6 @@ public class CoffeeMachine {
     private static void performTakeAction() {
         int disbursedCash = getAvailableMoney();
         setAvailableMoney(0);
-        System.out.println("I gave you $" + disbursedCash);
+        System.out.println("I gave you $" + disbursedCash + "\n");
     }
 }
