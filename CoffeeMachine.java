@@ -46,7 +46,7 @@ public class CoffeeMachine {
         System.out.println(getAvailableMilk() + " ml of milk");
         System.out.println(getAvailableBeans() + " gm of coffee beans");
         System.out.println(getAvailableCups() + " disposable cup/s");
-        System.out.println("₹" + getAvailableMoney() + " money\n");
+        System.out.println("$" + getAvailableMoney() + " money\n");
     }
 
     public static int getAvailableWater() {
